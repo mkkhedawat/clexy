@@ -1,0 +1,140 @@
+//- index page
+if is_home()
+  h4.page-title Recent Articles
+  each post in site.posts.sort('date', 'desc').toArray()
+    a.article(href= config.root + post.path)
+      article.item(itemscope, itemprop='blogPost', itemtype='https://schema.org/BlogPosting')
+        h2(itemprop='headline')= post.title
+        span.post-meta
+        //-  | Published on
+          time(itemprop='datePublished', datetime= post.date.toISOString())= full_date(new Date(post.date), ' dddd, MMMM Do YYYY')
+        p(itemprop='text').post-excerpt= post.intro ? post.intro : post.content.replace(/<(?:.|\n)*?>/gm, '').substr(0, 220)
+
+//- articles page
+if is_archive() || (is_page() && page.title.toLowerCase() == 'articles')
+  article.full
+    h1(itemprop='headline')= page.title
+    != page.content
+    - var lastyear = 0
+    for post, index in site.posts.sort('date', 'desc').toArray()
+      if lastyear != post.date.format('YYYY')
+        if index != 0
+          | </ul>
+        - lastyear = post.date.format('YYYY')
+        h4= lastyear
+        | <ul>
+        li(itemprop='name')
+          a(href= config.root + post.path, itemprop='url') #{post.title}
+          |  &nbsp; &mdash; &nbsp;&nbsp;
+          //- console.dir(post.tags.data)
+          for tag in post.tags.data
+            //- console.dir(tag)
+            a(href= config.root + 'tags/' + tag.name, itemprop='url') #{'#'+tag.name}
+            | &nbsp;&nbsp;
+          //- time(itemprop='datePublished', datetime= post.date.toISOString())= full_date(new Date(post.date), ' MMMM Do')
+      else
+        li
+          a(href= config.root + post.path) #{post.title}
+          |  &nbsp; &mdash; &nbsp;&nbsp;
+          //- console.dir(post.tags.data)
+          for tag in post.tags.data
+            //- console.dir(tag)
+            a(href= config.root + 'tags/' + tag.name, itemprop='url') #{'#'+tag.name}
+            | &nbsp;&nbsp;
+          //-time(itemprop='datePublished', datetime= post.date.toISOString())= full_date(new Date(post.date), ' MMMM Do')
+    if site.posts.toArray().length != 0
+      | </ul>
+else if is_page() && page.title.toLowerCase() == 'author'
+  article.full
+    h1(itemprop='headline')= page.title
+    .avatar
+    .avatar-name
+      | Manish Kumar Khedawat
+    .avatar-description
+      | Full Stack Developer, Bosch
+    .avatar-description
+      | Alumni'14, IIT Kharagpur
+    script(src="//use.fontawesome.com/d58379a62c.js")
+    .social-container
+      a(target="_blank",href="https://in.linkedin.com/in/mkkhedawat")
+        span(class="fa fa-linkedin icons" aria-hidden="true")
+      a(target="_blank",href="https://www.facebook.com/mkkhedawat")
+        span(class="fa fa-facebook icons" aria-hidden="true")
+      a(target="_blank",href="https://twitter.com/mkkhedawat")
+        span(class="fa fa-twitter icons" aria-hidden="true")
+      a(target="_blank",href="https://www.instagram.com/mkkhedawat/")
+        span(class="fa fa-instagram icons" aria-hidden="true")
+      a(href="mailto:writetomansa@gmail.com")
+        span(class="fa fa-envelope icons" aria-hidden="true")
+      a(target="_blank",href="https://github.com/mkkhedawat")
+        span(class="fa fa-github icons" aria-hidden="true")
+      a(target="_blank",href="https://stackoverflow.com/users/1608029/mkkhedawat")
+        span(class="fa fa-stack-overflow icons" aria-hidden="true")
+      a(target="_blank",href="https://sourceforge.net/u/mkkhedawat/profile/")
+        span(class="fa fa-noicon icons no-icons" aria-hidden="true") sf
+else if is_page()
+  article.full
+    br
+    br
+    br
+    br
+    h3= "Some Error occured. Go Home."
+    if page.updated
+      span.post-meta
+    != page.content
+    a(href= 'https://mkkhedawat.com', itemprop='url')
+      h3= 'Click Here'
+else if is_post()
+  article.full
+    h1(itemprop='headline')= page.title
+    for tag in page.tags.data
+      span(class='page-tag-anchor')
+        a(href= config.root + 'tags/' + tag.name, itemprop='url') #{'#'+tag.name}
+            | &nbsp;&nbsp;
+    span.post-meta
+     //- if page.updated
+        br
+        | Last updated on
+        time(itemprop='dateModified', datetime= page.date.toISOString())= full_date(new Date(page.updated), ' dddd, MMMM Do YYYY')
+    != page.content
+  br
+  br
+  if page.next
+    span(class='next-post')
+      a(href= config.root + page.next.path, itemprop='url') #{ 'Older Post ⇒'}
+  if page.prev
+    span(class='prev-post')
+      a(href= config.root + page.prev.path, itemprop='url') #{ '⇐ Next Post '}
+  br
+  include _comments
+  ins(class="adsbygoogle", style="display:block", data-ad-client="ca-pub-8265476096138958", data-ad-slot="5483722640", data-ad-format="auto")
+else if is_tag()
+  article.full
+    h1(itemprop='headline')= 'tag : ' + page.tag
+    != page.content
+    - var lastyear = 0
+    - var tag_posts = site.tags.findOne({name: page.tag}).posts
+    for post, index in tag_posts.sort('date', 'desc').toArray()
+      if lastyear != post.date.format('YYYY')
+        if index != 0
+          | </ul>
+        - lastyear = post.date.format('YYYY')
+        h4= lastyear
+        | <ul>
+        li(itemprop='name')
+          a(href= config.root + post.path, itemprop='url') #{post.title}
+          |  &nbsp; &mdash; &nbsp;&nbsp;
+          //- console.dir(post.tags.data)
+          for tag in post.tags.data
+            //- console.dir(tag)
+            a(href= config.root + 'tags/' + tag.name, itemprop='url') #{'#'+tag.name}
+            | &nbsp;&nbsp;
+      else
+        li
+          a(href= config.root + post.path) #{post.title}
+          |  &nbsp; &mdash; &nbsp;&nbsp;
+          for tag in post.tags.data
+            //- console.dir(tag)
+            a(href= config.root + 'tags/' + tag.name, itemprop='url') #{'#'+tag.name}
+            | &nbsp;&nbsp;
+    | </ul>

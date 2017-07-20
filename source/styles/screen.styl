@@ -1,0 +1,535 @@
+// ===========================================================================
+// Table of Contents
+// ===========================================================================
+// [ Credits : Base code taken from hexo-flexy theme ]
+//
+//   0. Settings
+//   0.0 Imports
+//   0.1 Webfonts
+//   0.2 Typography
+//   0.3 Colors
+//   0.4 Defaults
+//   1. Basics
+//   2. Header
+//   3. Main
+//   4. Typography
+//   5. Media Queries
+
+// ===========================================================================
+// 0. Settings
+// ===========================================================================
+
+// 0.0 Imports
+
+@import 'normalize.css'
+@import 'nib'
+@import '_*'
+
+// 0.1 Webfonts
+
+$font-directory = '../fonts/'
+
+webfont('Open Sans', 'opensans/300', 300, normal)
+webfont('Open Sans', 'opensans/400', 400, normal)
+webfont('Open Sans', 'opensans/600', 600, normal)
+webfont('Open Sans', 'opensans/700', 700, normal)
+webfont('Open Sans', 'opensans/800', 800, normal)
+webfont('Open Sans', 'opensans/300i', 300, italic)
+webfont('Open Sans', 'opensans/400i', 400, italic)
+webfont('Open Sans', 'opensans/600i', 600, italic)
+webfont('Open Sans', 'opensans/700i', 700, italic)
+webfont('Open Sans', 'opensans/800i', 800, italic)
+
+webfont('Fira Mono', 'fira/400', 400, normal)
+webfont('Fira Mono', 'fira/500', 500, normal)
+webfont('Fira Mono', 'fira/700', 700, normal)
+
+// 0.2 Typography
+
+$title-font   = 'Open Sans', sans-serif
+$heading-font = 'Open Sans', sans-serif
+$button-font  = 'Open Sans', sans-serif
+$small-font   = 'Open Sans', sans-serif
+$body-font    = 'Open Sans', sans-serif
+$code-font    = 'Fira Mono', monospace, sans-serif
+
+$title-weight   = 300
+$heading-weight = 300
+$small-weight   = 300
+$body-weight    = 300
+$code-weight    = 300
+
+// 0.3 Colors
+
+$white         = hsla(0, 0, 98%, 1)
+$gray          = hsla(0, 0, 45%, 1)
+$black         = hsla(0, 0, 8%, 1)
+
+$light-gray    = lighten($gray, 95%)
+$shade-gray    = lighten($gray, 35%)
+$dark-gray     = darken($gray, 35%)
+
+// 0.4 Defaults
+
+$author = 'Manish Kumar Khedawat'
+
+$title-color             = $white
+$description-color       = $gray
+$header-link-color       = $white
+$icon-color              = lighten($gray, 7%)
+
+$link-hover-header-color = $gray
+
+$body-color            = $black
+$post-meta-color       = $gray
+$body-link-color       = $black
+$body-link-hover-color = $gray
+
+$background-color   = $light-gray
+$accent-color       = $shade-gray
+$quote-accent-color = $black
+
+$default-padding = 20px
+
+// ===========================================================================
+// 1. Basics
+// ===========================================================================
+
+html
+  font-size 62.5%
+
+body
+  color $body-color
+  margin 0
+  height 100vh
+  flex-direction column // mobile first
+  font-family $body-font
+  font-size 1.62rem
+  font-weight $body-weight
+  line-height 1.6em
+a
+  color $body-link-color
+  text-decoration none
+  &:hover
+    transition color .3s ease
+
+::-moz-selection
+::selection
+  color $body-color
+  background $blue
+  text-shadow none
+
+header,
+main
+  overflow-y auto
+  -webkit-overflow-scrolling touch
+  padding 20px
+
+// ===========================================================================
+// 2. Header
+// ===========================================================================
+
+header
+  flex 1
+  overflow hidden
+  position relative
+  text-align center
+  a
+  h1
+  p
+  nav
+    position relative
+    z-index 2
+  // Link styling
+  a
+    color $header-link-color
+    text-decoration none
+    &:hover
+      text-decoration underline
+  // Blog title
+  h1
+    color $title-color
+    font-family $title-font
+    font-size 4.5rem
+    font-weight $title-weight
+    letter-spacing -1px
+    text-shadow 0 1px 6px hsla(0, 0, 0, .5)
+    a:hover
+      text-decoration none
+  // Blog description
+  p
+    color $description-color
+    font-family $body-font
+    font-size 1.62rem
+    font-weight $body-weight
+    letter-spacing 0
+    margin 0
+    text-shadow 0 1px 3px hsla(0, 0, 0, .35)
+  // Navigation list
+  nav ul
+    list-style none
+    margin 0
+    padding 0
+    li
+      display inline-block
+      padding 12px 0 12px 12px
+      &:after
+        content '·'
+        padding-left 12px
+      &:last-child
+        &:after
+          content ''
+  .space
+    animation slide 8s linear infinite
+    background-color $black
+    background-position center center
+    background-size 240px
+    height 400%
+    left 0
+    position absolute
+    top 0
+    width 400%
+    z-index 1
+  //Logo
+  .logo
+    height 100px
+    width 100px
+    border-radius 50%
+    background-size contain;
+    background url(../images/logo.png) no-repeat $white
+    background-color $white
+    background-position center
+    position relative
+    z-index 2
+    margin auto
+
+// Header animation
+@keyframes slide
+  0%
+    transform translate3d(0, 0, 0)
+  100%
+    transform translate3d(-240px, -240px, 0)
+
+// ===========================================================================
+// 3. Main
+// ===========================================================================
+
+main
+  // Background and text flow
+  background $background-color
+  flex 2
+  hypens auto
+  overflow-x hidden
+  padding 20px // Smaller padding on small screens
+  text-align left
+  word-break normal
+  word-wrap break-word
+  // Links to articles
+  a.article
+    color $body-color
+    text-decoration none
+    // No border-bottom on last article
+    &:last-of-type
+      article
+        border none
+        &:after
+          background none
+          border none
+          box-shadow none
+          padding-bottom 20px
+    &:hover h2
+      color $body-link-hover-color
+      transition color .3s ease
+  .page-title
+    color $shade-gray
+    font-family $body-font
+    font-size 1.62rem
+    font-style italic
+    font-weight $body-weight
+    margin 0
+    padding-bottom 16px
+    text-align center
+  .post-meta
+    color $shade-gray
+    display inline-block
+    font-family $small-font
+    font-weight $small-weight
+    font-size 1.62rem
+    margin 0
+  // Article list
+  article.item
+    border-bottom 1px solid hsla(0, 0, 0, .15)
+    color $body-color
+    padding 40px
+    text-align center
+    h2
+      break-word normal
+      color $body-color
+      margin-bottom 16px
+      word-wrap break-word
+    p.post-excerpt
+      font-size 1.62rem
+      line-height 1.6em
+      margin 16px 0 0 0
+    &:after
+      display block
+      content ''
+      width 7px
+      height 7px
+      // Circle border
+      border darken($background-color, 12%) 1px solid
+      position relative
+      top 45px
+      left 50%
+      margin-left -5px
+      // Inside the circle
+      background darken($background-color, 15%)
+      border-radius 100%
+      // Around the circle
+      box-shadow $background-color 0 0 0 5px
+  // Full article
+  article.full
+    padding-bottom 20px
+    span.page-tag-anchor
+      float right
+    h2
+      margin 0
+    ul
+      list-style none
+      padding 0
+    a
+      text-decoration none
+      &:hover
+        color $body-link-hover-color
+    p + img
+      margin-top 0
+    img
+      // Images are responsive by default
+      border-radius 3px
+      height auto
+      margin-top 20px
+      width 100%
+    // Blockquotes within articles
+    blockquote
+      box-sizing border-box
+      margin 1.6em 0 1.6em 0
+      padding 0 0 0 1.6em
+      border-left $quote-accent-color .4em solid
+      footer
+        text-align left
+        padding 0
+        border 0
+        background none
+        color $body-color
+        line-height 1.6em
+        font-size .9em
+      p
+        margin .8em 0
+        font-style italic
+      small
+        display inline-block
+        margin .8em 0 .8em 1.5em
+        font-size .9rem
+        color $light-gray
+        &:before
+          content '\2014 \00A0'
+      ol
+      ul
+        font-style italic
+      cite
+        font-weight bold
+        &:before
+          content '—'
+          padding 0 .3em
+        a
+          color $link-article-color
+          font-weight normal
+    // Images without shadows and round borders
+    .noshadow
+      box-shadow none
+      border-radius 0
+    // Display logos small and next to each other
+    .logos
+      display inline-block
+      clear both
+      img
+        width auto
+    .left
+      float left
+    .right
+      float right
+  span.next-post
+    float right
+    a
+      &:hover
+        color $body-link-hover-color
+  span.prev-post
+    float left
+    a
+      &:hover
+        color $body-link-hover-color
+  section#comments
+    border-top 1px solid hsla(0, 0, 0, .15)
+    padding-top 20px
+  // Footer
+  footer
+    padding 0
+    text-align center
+    position relative
+    padding 4rem 0
+    border darken($background-color, 15%) 1px solid
+    font-size 1.3rem
+    line-height 2.1em
+    color lighten($body-color, 50%)
+    background darken($background-color, 5%)
+    :not(main) > a
+      color lighten($body-color, 20%)
+      font-weight 700
+      text-decoration none
+  .avatar
+    margin auto
+    width 150px
+    height 150px
+    border-radius 50%
+    background url("../images/avatar.jpg")
+    background-repeat no-repeat
+    background-size 100% 100%
+    -webkit-box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.75);
+    -moz-box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.75);
+    box-shadow: 0px 0px 14px 0px rgba(0,0,0,0.75);
+  .avatar-name
+    text-align center
+    font-size 3.3rem
+    margin 30px auto 9px auto
+    color $black
+  .avatar-description
+    margin-top 5px
+    text-align center
+    color $gray
+    font-size 2.1rem
+  .social-container
+    margin 10px auto auto auto
+    text-align center
+    a
+      .icons
+        margin-right 12px
+        margin-left 12px
+        padding auto 12px
+        color $icon-color
+        font-size 2.3rem
+        &:hover
+          color $black
+      .no-icons
+        font-weight 800
+        font-size 2.5rem
+
+
+// ===========================================================================
+// 4. Typography Basics
+// ===========================================================================
+
+h1,
+h2,
+h3,
+h4,
+h5,
+h6
+  font-family $heading-font
+  font-weight $heading-weight
+  line-height 1
+  margin-top 0
+  margin-bottom 20px
+  text-rendering optimizeLegibility
+
+h1
+  font-size 4.5rem
+  letter-spacing -2px
+  line-height 1.2em
+  text-indent -3px
+
+h2
+  font-size 3.9rem
+  letter-spacing -1px
+  line-height 1.2em
+  text-indent -2px
+
+h3
+  font-size 3.3rem
+
+h4
+  font-size 2.8rem
+  margin-bottom 0
+
+h5
+  font-size 2.4rem
+
+h6
+  font-size 2rem
+
+a
+  transition color ease .3s
+  text-decoration none
+  &:hover
+    color $link-article-color
+
+hr
+  display block
+  height 1px
+  border 0
+  border-top darken($background-color, 15%) 1px solid
+  margin 40px 0
+  padding 0
+
+  &:after
+    display block
+    content ''
+    width 7px
+    height 7px
+    border darken($background-color, 12%) 1px solid // circle border
+    position relative
+    top -5px
+    left 50%
+    margin-left -5px
+    background darken($background-color, 15%)  // inside the circle
+    border-radius 100%
+    box-shadow $background-color 0 0 0 5px // around the circle
+
+// ===========================================================================
+// 5. Media Queries
+// ===========================================================================
+
+@media (min-width 720px)
+
+  body
+    display flex
+    flex-direction row
+
+    header
+      flex 1
+      overflow hidden
+      text-align right
+      padding 40px
+
+      .logo
+        margin-right 0
+
+      nav
+        ul
+          padding-top 24px
+          li
+            display block
+            line-height 1.6em
+            padding 0
+            &:after
+              content ''
+              padding 0
+
+    main
+      flex 2
+      padding 40px
+      form
+        .form-column
+          input[type="name"]
+          input[type="email"]
+            width 35%
+            margin .5em .5em .5em 0

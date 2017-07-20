@@ -1,0 +1,14 @@
+# config
+logo: /images/logo.png
+keywords: "pen, notes, coding, developer, mkkhedawat, manish kumar khedawat, javascript, c++, nodejs, angularjs"
+menu:
+  home: /
+  articles: /articles
+  author: /author
+
+# Content
+excerpt_link: Read more
+
+# Miscellaneous
+#rss: /atom.xml
+google_analytics:
