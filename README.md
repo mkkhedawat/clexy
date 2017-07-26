@@ -10,6 +10,8 @@ You can see the theme in action on my [website](https://mkkhedawat.com/).
 
 #### In Console
 ```
+$ cd root-dir-for-hexo-blog
+$ yarn 
 $ git clone https://github.com/mkkhedawat/clexy themes/clexy
 $ yarn remove hexo-renderer-ejs
 $ yarn add hexo-renderer-jade
