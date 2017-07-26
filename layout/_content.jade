@@ -46,30 +46,41 @@ else if is_page() && page.title.toLowerCase() == 'author'
   article.full
     h1(itemprop='headline')= page.title
     .avatar
-    .avatar-name
-      | Manish Kumar Khedawat
-    .avatar-description
-      | Full Stack Developer, Bosch
-    .avatar-description
-      | Alumni'14, IIT Kharagpur
-    script(src="//use.fontawesome.com/d58379a62c.js")
-    .social-container
-      a(target="_blank",href="https://in.linkedin.com/in/mkkhedawat")
-        span(class="fa fa-linkedin icons" aria-hidden="true")
-      a(target="_blank",href="https://www.facebook.com/mkkhedawat")
-        span(class="fa fa-facebook icons" aria-hidden="true")
-      a(target="_blank",href="https://twitter.com/mkkhedawat")
-        span(class="fa fa-twitter icons" aria-hidden="true")
-      a(target="_blank",href="https://www.instagram.com/mkkhedawat/")
-        span(class="fa fa-instagram icons" aria-hidden="true")
-      a(href="mailto:writetomansa@gmail.com")
-        span(class="fa fa-envelope icons" aria-hidden="true")
-      a(target="_blank",href="https://github.com/mkkhedawat")
-        span(class="fa fa-github icons" aria-hidden="true")
-      a(target="_blank",href="https://stackoverflow.com/users/1608029/mkkhedawat")
-        span(class="fa fa-stack-overflow icons" aria-hidden="true")
-      a(target="_blank",href="https://sourceforge.net/u/mkkhedawat/profile/")
-        span(class="fa fa-noicon icons no-icons" aria-hidden="true") sf
+    if(config.about !== undefined)
+      .avatar-name
+        | #{config.about.name}
+      .avatar-description
+        | #{config.about.intro1}
+      if (config.about.intro2 != undefined)
+        .avatar-description
+          | #{config.about.intro2}
+      script(src="//use.fontawesome.com/d58379a62c.js")
+      br
+      .social-container
+        if(config.about.linkedin !== undefined)
+          a(target="_blank",href=config.about.linkedin)
+            span(class="fa fa-linkedin icons" aria-hidden="true")
+        if(config.about.facebook !== undefined)
+          a(target="_blank",href=config.about.facebook)
+            span(class="fa fa-facebook icons" aria-hidden="true")
+        if(config.about.twitter !== undefined)
+          a(target="_blank",href=config.about.twitter)
+            span(class="fa fa-twitter icons" aria-hidden="true")
+        if(config.about.instagram !== undefined)
+          a(target="_blank",href=config.about.instagram)
+            span(class="fa fa-instagram icons" aria-hidden="true")
+        if(config.about.email !== undefined)
+          a(href="mailto:"+ config.about.email)
+            span(class="fa fa-envelope icons" aria-hidden="true")
+        if(config.about.github !== undefined)
+          a(target="_blank",href=config.about.github)
+            span(class="fa fa-github icons" aria-hidden="true")
+        if(config.about.stackoverflow !== undefined)
+          a(target="_blank",href=config.about.stackoverflow)
+            span(class="fa fa-stack-overflow icons" aria-hidden="true")
+        if(config.about.sourceforge !== undefined)
+          a(target="_blank",href=config.about.sourceforge)
+            span(class="fa fa-noicon icons no-icons" aria-hidden="true") sf
 else if is_page()
   article.full
     br
@@ -80,7 +91,7 @@ else if is_page()
     if page.updated
       span.post-meta
     != page.content
-    a(href= 'https://mkkhedawat.com', itemprop='url')
+    a(href= config.root, itemprop='url')
       h3= 'Click Here'
 else if is_post()
   article.full
