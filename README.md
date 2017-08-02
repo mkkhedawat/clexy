@@ -6,6 +6,9 @@
 
 You can see the theme in action on my [website](https://mkkhedawat.com/).
 
+[![Sponsor](https://app.codesponsor.io/embed/wgk6b4VsPhVtCnJng2RZXPmH/mkkhedawat/clexy.svg)](https://app.codesponsor.io/link/wgk6b4VsPhVtCnJng2RZXPmH/mkkhedawat/clexy)
+
+
 ## Setting up
 
 #### In Console
