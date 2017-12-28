@@ -4,9 +4,7 @@
 
 ## Demo
 
-You can see the theme in action on my [website](https://mkkhedawat.com/).
-
-[![Sponsor](https://app.codesponsor.io/embed/wgk6b4VsPhVtCnJng2RZXPmH/mkkhedawat/clexy.svg)](https://app.codesponsor.io/link/wgk6b4VsPhVtCnJng2RZXPmH/mkkhedawat/clexy)
+You can see the theme in action on my [website](https://mkkhedawat.com/)
 
 
 ## Setting up
@@ -14,7 +12,7 @@ You can see the theme in action on my [website](https://mkkhedawat.com/).
 #### In Console
 ```
 $ cd root-dir-for-hexo-blog
-$ yarn 
+$ yarn
 $ git clone https://github.com/mkkhedawat/clexy themes/clexy
 $ yarn remove hexo-renderer-ejs
 $ yarn add hexo-renderer-jade
