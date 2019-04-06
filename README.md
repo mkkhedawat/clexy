@@ -4,7 +4,7 @@
 
 ## Demo
 
-You can see the theme in action on my [website](https://mkkhedawat.com/)
+You can see the theme in action on my [website](https://mkkhedawat.github.io/)
 
 
 ## Setting up
@@ -91,4 +91,4 @@ Open browser and navigate to http://localhost:4000/
 
 ## License
 
-MIT © [Manish Kumar Khedawat](http://mkkhedawat.com)
+MIT © [Manish Kumar Khedawat](https://mkkhedawat.github.io/)
